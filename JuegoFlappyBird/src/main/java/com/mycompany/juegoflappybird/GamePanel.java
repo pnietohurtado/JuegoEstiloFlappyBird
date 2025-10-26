@@ -4,6 +4,8 @@
  */
 package com.mycompany.juegoflappybird;
 
+import Keys.KeyHandler;
+import Sound.Sound;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -33,11 +35,15 @@ public class GamePanel extends JPanel implements Runnable{
     private Thread gameThread; 
     private final int FPS = 60; 
     
+    // Intances 
+    public KeyHandler kh = new KeyHandler(this); 
+    public Sound sound = new Sound(); 
     
     public GamePanel(){
         this.setPreferredSize(new Dimension(this.screenWidth, this.screenHeight));
         this.setMinimumSize(new Dimension(this.screenWidth, this.screenHeight));
         this.setBackground(Color.black);
+        this.addKeyListener(kh);
         this.setDoubleBuffered(true);
         this.setFocusable(true); 
     }
