@@ -10,4 +10,12 @@
         <maven.compiler.release>23</maven.compiler.release>
         <exec.mainClass>com.mycompany.juegoflappybird.JuegoFlappyBird</exec.mainClass>
     </properties>
+    
+    <build>
+        <resources>
+            <resource>
+                <directory>res</directory>
+            </resource>
+        </resources>
+    </build>
 </project>

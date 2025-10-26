@@ -4,6 +4,9 @@
 
 package com.mycompany.juegoflappybird;
 
+import static com.mycompany.juegoflappybird.JuegoFlappyBird.main;
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 /**
  *
  * @author pablo
@@ -11,6 +14,22 @@ package com.mycompany.juegoflappybird;
 public class JuegoFlappyBird {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        
+        JFrame window = new JFrame(); 
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setResizable(true);
+        window.setTitle("Ovulitos");
+        
+        //window.setIconImage(ImageIO.read(main.class.getResources("/Logo/Ovulitos.jpg")));
+        
+        GamePanel gp = new GamePanel(); 
+        window.add(gp); 
+        window.pack(); 
+        
+        window.setLocationRelativeTo(null); 
+        window.setVisible(true); 
+        
+        
+        
     }
 }
