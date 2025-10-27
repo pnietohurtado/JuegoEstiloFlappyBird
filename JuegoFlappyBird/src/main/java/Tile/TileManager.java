@@ -4,11 +4,16 @@
  */
 package Tile;
 
+import Keys.KeyHandler;
+import com.mycompany.juegoflappybird.GamePanel;
+import com.mycompany.juegoflappybird.UtilityTool;
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -18,7 +23,7 @@ public class TileManager {
     private GamePanel gp; 
     private KeyHandler kh; 
     public Tile[] tile; 
-    public int mapTileNum[]; 
+    public int mapTileNum[][]; 
     ArrayList<String> fileNames = new ArrayList<>(); 
     ArrayList<String> collisionStatus = new ArrayList<>(); 
     
@@ -52,7 +57,137 @@ public class TileManager {
         tile = new Tile[fileNames.size()]; 
         getTileImage(); 
         
-        loadMap[0]; 
+        loadMap(map); 
         
     }
+    
+    
+     public void getTileImage()
+    {
+        for(int i = 0; i < fileNames.size(); i++){
+            
+            String fileName; 
+            boolean collision; 
+            
+            fileName = fileNames.get(i); 
+            if(collisionStatus.get(i).equals("true")){
+                collision = true; 
+            }else{
+                collision = false; 
+            }
+            
+            setUp(i, fileName, collision); 
+            
+        }
+            
+    }
+    
+    public void setUp(int index, String imagePath, boolean collsion){
+        UtilityTool uTool = new UtilityTool(); 
+        
+        try{
+            
+            tile[index] = new Tile(); 
+            tile[index].image = ImageIO.read(getClass().getResourceAsStream("/Tiles2/"+imagePath)); 
+            tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize); 
+            tile[index].collision = collsion; 
+            
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void loadMap(String path)
+    {
+        
+        InputStream is = getClass().getResourceAsStream(path); 
+        BufferedReader br = new BufferedReader(new InputStreamReader(is)); 
+        
+        try{
+            String linea2 = br.readLine(); 
+            //this.nombre = linea2; 
+            String maxTile[] = linea2.split(" "); 
+            gp.maxWorldCol = maxTile.length; 
+            gp.maxWorldRow = maxTile.length; 
+           
+            
+            mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow]; 
+            br.close(); 
+        }catch(IOException e){
+            
+        }
+        
+        
+        try{
+            
+            is = getClass().getResourceAsStream(path);
+            br = new BufferedReader(new InputStreamReader(is)); 
+            
+            int col = 0; 
+            int row = 0; 
+            
+            while(col < gp.maxWorldCol && row < gp.maxWorldRow ){
+                String line = br.readLine(); 
+                
+                while(col < gp.maxWorldCol ){
+                    String numbers[] = line.split(" "); 
+                    
+                    int num = Integer.parseInt(numbers[col]); 
+                    mapTileNum[col][row] = num; 
+                    col++; 
+                }
+                
+                if(col == gp.maxWorldCol){
+                    col = 0; 
+                    row++; 
+                }
+            }
+            
+            br.close(); 
+        }catch(Exception e){
+            
+        }
+    }
+    
+    
+    public void draw(Graphics2D g2)
+    {
+        int worldCol = 0; 
+        int worldRow = 0; 
+
+        while(worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow)
+        {
+            int tileNum = mapTileNum[worldCol][worldRow]; 
+            
+            int worldX = worldCol * gp.tileSize; 
+            int worldY = worldRow * gp.tileSize; 
+            int screenX = worldX - gp.player.worldX + gp.player.screenX; 
+            int screenY = worldY - gp.player.worldY + gp.player.screenY; 
+            
+            if(worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
+                    worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
+                    worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
+                    worldY - gp.tileSize < gp.player.worldY + gp.player.screenY){
+                    
+                g2.drawImage(tile[tileNum].image, screenX,screenY,gp.tileSize,gp.tileSize,null); 
+            }
+            
+            // ----------- Para poder enseñar las colisiones del personaje -----
+            if(this.kh.cH == true){
+                g2.setColor(Color.white); 
+                g2.drawRect(screenX , screenY , gp.screenHeight - gp.tileSize, gp.screenWidth - gp.tileSize);
+            }
+            // -----------------------------------------------------------------
+
+            worldCol++; 
+            
+            if(worldCol == gp.maxWorldCol){
+                worldCol = 0; 
+                worldRow++;  
+            }
+        }
+        
+        
+    }
+    
 }

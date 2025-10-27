@@ -5,7 +5,10 @@
 package com.mycompany.juegoflappybird;
 
 import Keys.KeyHandler;
+import Player.Player;
 import Sound.Sound;
+import Tile.TileManager;
+import colisiones.Collision;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -29,6 +32,11 @@ public class GamePanel extends JPanel implements Runnable{
     public final int screenHeight = tileSize * maxScreenRow; 
     
     
+    // World Settings 
+    public int maxWorldCol;
+    public int maxWorldRow; 
+    public final int worldWidth = tileSize * maxWorldCol;
+    public final int worldHeigth = tileSize * maxWorldRow;
     
     
     // Variables 
@@ -38,6 +46,10 @@ public class GamePanel extends JPanel implements Runnable{
     // Intances 
     public KeyHandler kh = new KeyHandler(this); 
     public Sound sound = new Sound(); 
+    public Player player = new Player(); 
+    public Collision cH = new Collision(this); 
+    public TileManager tileManager = new TileManager(this, kh); 
+
     
     public GamePanel(){
         this.setPreferredSize(new Dimension(this.screenWidth, this.screenHeight));
