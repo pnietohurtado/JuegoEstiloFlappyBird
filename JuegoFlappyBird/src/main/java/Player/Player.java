@@ -49,8 +49,8 @@ public class Player extends Entity{
     // Player's Initial Position 
     public void setDefaultValues() 
     {
-        worldx = gp.tileSize * 66 ; 
-        worldy = gp.tileSize * 201 ; 
+        worldx = gp.tileSize * 30 ; 
+        worldy = gp.tileSize * 30 ; 
     }
     
     String u1 = "/Player/Ovulito.png"; 

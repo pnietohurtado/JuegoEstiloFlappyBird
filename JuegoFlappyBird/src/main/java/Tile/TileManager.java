@@ -7,7 +7,7 @@ package Tile;
 import Keys.KeyHandler;
 import com.mycompany.juegoflappybird.GamePanel;
 import com.mycompany.juegoflappybird.UtilityTool;
-import java.awt.Color;
+import java.awt.Graphics2D;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,13 +32,13 @@ public class TileManager {
     public boolean noCollision = false; 
     
     
-    public String map = "/Maps/mapa1.txt"; 
+    public String map = "/Map/map.txt"; 
     
     public TileManager(GamePanel gp, KeyHandler kh){
         this.gp = gp; 
         this.kh = kh; 
         
-        InputStream is = getClass().getResourceAsStream("/Maps/collision.txt"); 
+        InputStream is = getClass().getResourceAsStream("/Collision/collision.txt"); 
         BufferedReader br = new BufferedReader(new InputStreamReader(is)); 
         
         String linea; 
@@ -88,7 +88,7 @@ public class TileManager {
         try{
             
             tile[index] = new Tile(); 
-            tile[index].image = ImageIO.read(getClass().getResourceAsStream("/Tiles2/"+imagePath)); 
+            tile[index].image = ImageIO.read(getClass().getResourceAsStream("/Background/"+imagePath)); 
             tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize); 
             tile[index].collision = collsion; 
             
