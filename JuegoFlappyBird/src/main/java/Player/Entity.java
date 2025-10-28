@@ -17,14 +17,14 @@ import javax.imageio.ImageIO;
  */
 public class Entity {
  
-    private int worldx, worldy; 
-    private BufferedImage u; 
-    private int spriteCounter = 0; 
-    private int spriteNum = 1; 
+    public int worldx, worldy; 
+    protected BufferedImage u; 
+    protected int spriteCounter = 0; 
+    protected int spriteNum = 1; 
     
     public Rectangle solidArea = new Rectangle(0,0,48,48); 
     public Rectangle nearSolidArea; 
-    public int solidAreaDefaultX, solidAreadDefaultY; 
+    public int solidAreaDefaultX, solidAreaDefaultY; 
     public boolean collision; 
     
     public boolean move = false; 
