@@ -49,11 +49,16 @@ public class Player extends Entity{
     // Player's Initial Position 
     public void setDefaultValues() 
     {
-        worldx = gp.tileSize * 30 ; 
-        worldy = gp.tileSize * 30 ; 
+        try{
+            worldx = gp.tileSize * 34 ; 
+            worldy = gp.tileSize * 34 ; 
+        }catch(Exception e ){
+            System.out.println("TileSize " + gp.tileSize);
+            System.out.println("El valor de X : " + worldx);
+        }
     }
     
-    String u1 = "/Player/Ovulito.png"; 
+    String u1 = "/Player/Ovulito"; 
     public void getPlayerImage(){
         u = setUp(u1); 
     }

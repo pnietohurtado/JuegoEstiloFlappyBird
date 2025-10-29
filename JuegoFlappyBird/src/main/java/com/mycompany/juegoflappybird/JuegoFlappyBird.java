@@ -5,6 +5,7 @@
 package com.mycompany.juegoflappybird;
 
 import static com.mycompany.juegoflappybird.JuegoFlappyBird.main;
+import static com.sun.tools.javac.Main.main;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 /**
