@@ -6,7 +6,9 @@ package Player;
 
 import Keys.KeyHandler;
 import com.mycompany.juegoflappybird.GamePanel;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -53,8 +55,10 @@ public class Player extends Entity{
             worldx = gp.tileSize * 34 ; 
             worldy = gp.tileSize * 34 ; 
         }catch(Exception e ){
-            System.out.println("TileSize " + gp.tileSize);
+            //System.out.println("TileSize " + gp.tileSize);
             System.out.println("El valor de X : " + worldx);
+        }finally{
+           // System.out.println("Tile " + (gp.tileSize * 25));
         }
     }
     
@@ -99,6 +103,45 @@ public class Player extends Entity{
             }    
             
         }
+    }
+     
+     public void draw(Graphics2D g2) 
+    {
+        BufferedImage image = null; 
+        image = u; 
+        /*switch(direction) {
+            case "up": 
+                if(spriteNum == 1) {
+                    image = b1; 
+                }else if(spriteNum == 2){
+                    image = b2; 
+                }
+                break;
+            case "down": 
+                if(spriteNum == 1) {
+                    image = f1; 
+                }else if(spriteNum == 2){
+                    image = f2; 
+                }
+                break;
+            case "left": 
+                if(spriteNum == 1) {
+                    image = l1; 
+                }else if(spriteNum == 2){
+                    image = l2; 
+                }
+                break;
+            case "right": 
+                if(spriteNum == 1) {
+                    image = r1; 
+                }else if(spriteNum == 2){
+                    image = r2; 
+                }
+                break;
+        }*/
+            g2.drawImage(image,screenX,screenY,gp.tileSize, gp.tileSize,null); 
+            
+            
     }
     
 }

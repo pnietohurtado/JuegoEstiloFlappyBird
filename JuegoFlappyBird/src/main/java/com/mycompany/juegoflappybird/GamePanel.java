@@ -112,8 +112,9 @@ public class GamePanel extends JPanel implements Runnable{
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g; 
         
-        g2.setColor(Color.red);
-        g2.drawString("Hola que tal", 100, 100); 
+        
+        tileManager.draw(g2); 
+        player.draw(g2); 
     }
     
     
